@@ -1,16 +1,16 @@
-# IR-semestralni_prace
+# IR-Semestral project
 
-Semestrální práce realizuje Information Retrieval systém (IR), který zpracovává data v Českém jazyce a ve formátu json nebo jsonl. Dále tento systém umožňuje Vektorové nebo Booleovské vyhledávání v zaindexovaných datech.
+This semestral project implements an Information Retrieval (IR) system that processes data in the Czech language in either **json** or **jsonl** format. The system allows for **Vector** or **Boolean** searching within the indexed data.
 
-## Spuštění
-Program je možné spustit buď pomocí příkazu
+## Execution
+The program can be started either using the command:
 
 `python.exe main.py`
 
-nebo naimportováním projektu do PyCharm IDE a spuštěním `main.py`.
+or by importing the project into the PyCharm IDE and running `main.py`.
 
-### Knihovny
-Pro správné fungování aplikace je nutné mít nainstalované tyto knihovny:
+### Libraries
+For the application to function correctly, the following libraries must be installed:
 
 - `lxml`
 - `majka`
@@ -19,39 +19,37 @@ Pro správné fungování aplikace je nutné mít nainstalované tyto knihovny:
 - `unidecode`
 
 ## GUI
-IR systém má grafické rozhraní, které umožňuje přidání vlastních dat a jejich zaindexování. Následně je možné v zaindexovaných datech vyhledávat pomocí Vektorového nebo Boolovského vyhledávání. Je zde také možné omezit počet zobrazovaných výsledků pomocí **Results to display**. Pokud je počet zobrazovaných výsledků nastaven na hodnotu **0**. Aplikace vypíše všechny nalezené výsledky.   
+The IR system features a graphical user interface that allows users to add their own data and index it. Subsequently, it is possible to search the indexed data using Vector or Boolean search. You can also limit the number of shown results using **Results to display**. If the number of results to display is set to **0**, the application will print all found results.
 
-## Evaulační script
-Aplikace také implementuje rozhraní pro evaluační script. Evaulaci je možné spustit pomocí parametru `-test`:
+## Evaluation Script
+The application also implements an interface for an evaluation script. Evaluation can be initiated using the `-test` parameter:
 
 `python.exe main.py -test`
 
-Evaulační script poté zaindexuje evaulační data ze složky `../data/cs/` a vytvoří soubor s výsledky do složky `../output/ranked_results_yyyy-mm-dd_hh-mm-ss.txt`.
+The evaluation script then indexes the evaluation data from the `../data/cs/` folder and creates a results file in the `../output/ranked_results_yyyy-mm-dd_hh-mm-ss.txt` folder.
 
-Výstupní soubor slouží jako jeden ze vstupů pro evaluační script `trec-eval`. Dalším potřebným souborem je soubor `gold_relevancies.txt`, který je součástí evaulačních dat
+The output file serves as one of the inputs for the `trec-eval` evaluation script. The other required file is `gold_relevancies.txt`, which is part of the evaluation data.
 
-### Výsledky evaulace
-V tabulce jsou uvedeny výsledky evaulace s různým preprocessingem:
+### Evaluation Results
+The table below lists the evaluation results with different types of preprocessing:
 
-| Preprocessing | Indexace (s) | TF-IDF (s) | Boolean (s) | MAP |
+| Preprocessing | Indexing (s) | TF-IDF (s) | Boolean (s) | MAP |
 | ----------- | ----------- | ----------- | ----------- | ----------- | 
 | Lemmatization | 163.84 | 38.13 | 81.38 | 0.1727 |
 | Stemming | 171.12 | 31.88 | 70.05 | 0.1624 |
 | Lemmatization,<br>Remove diacritics,<br>Lowercase | 197.42 | 37.46 | 81.37 | 0.1733 |
 | Stemming,<br>Remove diacritics,<br>Lowercase | 202.08 | 32.94 | 66.29 | 0.1846 |
 
-Nejlepší skóre **MAP (0.1846)** má Stemming s odtraněním diakritiky a převedením na malá písmena.
-Takto vysokého výsledku se mi podařilo dosáhnout až po přidání titulků článků do dokumentů.
+The best **MAP score (0.1846)** was achieved using Stemming with diacritics removal and conversion to lowercase. This high result was achieved only after adding article titles to the documents.
 
-Pokud bychom hodnotili podle času jednotlivých operací tak nejrychlejší indexaci měla Lemmatizace.
-Vektorové vyhledávání bylo nejryhlejší u samotného Stemmingu a nejrychlejší Booleovské vyhledávání bylo u Stemmingu s odtraněním diakritiky a převedením na malá písmena.
+In terms of operation time, Lemmatization had the fastest indexing. Vector search was fastest with standalone Stemming, and the fastest Boolean search was achieved with Stemming combined with diacritics removal and lowercase conversion.
 
-Co se týče časových výsledků tak ty jsou do značné míry ovlivněny zatížením stroje na kterém běží evaluace.
+Regarding the time results, these are largely influenced by the load on the machine where the evaluation is running.
 
-## Log soubor
-IR systém také generuje `log.txt`, který lze nalézt ve složce `../log/`. Tento soubor obsahuje záznam výstupu do konzole v GUI nebo výstup evaulačního scriptu. 
+## Log File
+The IR system also generates a `log.txt` file, which can be found in the `../log/` folder. This file contains a record of the console output from the GUI or the output of the evaluation script.
 
-## Vstupní a Evaluační data
-Vstupní data a evaluační data jsou dostupná zde: [data](https://drive.google.com/file/d/1eDDk8K1ET7f9CnhkzjhYrUpySjR_Xqkg/view?usp=sharing)
+## Input and Evaluation Data
+Input and evaluation data are available here: [data](https://drive.google.com/file/d/1eDDk8K1ET7f9CnhkzjhYrUpySjR_Xqkg/view?usp=sharing)
 
-Po stažení a rozbalení zip souboru stačí nakopírovat soubor `data.jsonl` a složku `cs` do složky `data`.
+After downloading and extracting the zip file, simply copy the `data.jsonl` file and the `cs` folder into the `data` directory.
